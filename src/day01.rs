@@ -1,4 +1,4 @@
-pub fn part1(input: &str) -> u64 {
+pub fn part1(input: String) -> u64 {
     input
         .lines()
         .map(|line| {
@@ -34,7 +34,7 @@ fn numbers() -> Vec<(String, u8)> {
     numbers
 }
 
-pub fn part2(input: &str) -> u64 {
+pub fn part2(input: String) -> u64 {
     let lookup = numbers();
     input
         .lines()
@@ -75,8 +75,8 @@ fn reduce(lookup: &[(String, u8)], p: Pair, input: &str) -> Pair {
             let p = p.push(*n);
             if prefix.len() > 1 {
                 return reduce(lookup, p, input.split_at(prefix.len() - 1).1);
-            } 
-            
+            }
+
             return reduce(lookup, p, next);
         }
     }
@@ -91,24 +91,25 @@ fn reduce(lookup: &[(String, u8)], p: Pair, input: &str) -> Pair {
 #[cfg(test)]
 mod test {
     use crate::day01::{part1, part2};
+    use crate::{input, input_example};
 
     #[test]
     fn example() {
-        assert_eq!(part1(include_str!("../inputs/day01_example")), 142);
+        assert_eq!(part1(input_example!(1, 1)), 142);
     }
 
     #[test]
     fn test_p1() {
-        assert_eq!(part1(include_str!("../inputs/day01")), 55172);
+        assert_eq!(part1(input!(1)), 55172);
     }
 
     #[test]
     fn test_p2() {
-        assert_eq!(part2(include_str!("../inputs/day01")), 54925);
+        assert_eq!(part2(input!(1)), 54925);
     }
 
     #[test]
     fn example_2() {
-        assert_eq!(part2(include_str!("../inputs/day01_example2")), 281);
+        assert_eq!(part2(input_example!(1, 2)), 281);
     }
 }

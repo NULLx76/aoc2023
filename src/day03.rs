@@ -46,7 +46,7 @@ pub fn part1(input: String) -> u64 {
 
 #[inline]
 pub fn is_symbol(ch: &char) -> bool {
-    !ch.is_numeric() && ch != &'.'
+    ch.is_ascii_punctuation() && ch != &'.'
 }
 
 fn symbol_adjacent(map: &[Vec<char>], row: usize, start: usize, end: usize) -> bool {
@@ -116,7 +116,7 @@ mod tests {
     use crate::{
         day03::parse,
         day03::{part1, part2, symbol_adjacent},
-        input, input_example,
+        input, input_example, input_ext,
     };
 
     #[test]
@@ -137,12 +137,17 @@ mod tests {
 
     #[test]
     fn test_p1() {
-        assert_eq!(part1(input!(3)), 527364);
+        assert_eq!(part1(input!(3)), 527_364);
     }
 
     #[test]
     fn test_example_p2() {
-        assert_eq!(part2(input_example!(3, 1)), 467835);
+        assert_eq!(part2(input_example!(3, 1)), 467_835);
+    }
+
+    #[test]
+    fn test_example_p2_laura() {
+        assert_eq!(part1(input_ext!(3, "_laura")), 556_367);
     }
 
     #[test]

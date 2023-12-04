@@ -9,7 +9,10 @@ struct Card {
 
 impl Card {
     fn count_wins(&self) -> usize {
-        self.numbers.iter().filter(|n| self.winning.contains(n)).count()
+        self.numbers
+            .iter()
+            .filter(|n| self.winning.contains(n))
+            .count()
     }
 }
 
@@ -58,14 +61,11 @@ pub fn part1(input: String) -> usize {
 pub fn part2(input: String) -> u64 {
     let input = parse(input);
 
-    let map = input
-        .iter()
-        .map(Card::count_wins)
-        .collect_vec();
+    let map = input.iter().map(Card::count_wins).collect_vec();
+
+    let mut cards = input.iter().map(|c| c.id).collect_vec();
 
     let mut c = 0;
-
-    let mut cards: Vec<usize> = input.iter().map(|c| c.id).collect();
 
     while let Some(card) = cards.pop() {
         let n = map[card - 1];
